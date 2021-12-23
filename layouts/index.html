@@ -1,0 +1,28 @@
+{{ define "main" }}
+  <main aria-role="main">
+  <div class="homepage-content is-normal">
+      {{.Content}}
+  </div>
+  <div>
+    {{ range where (where .Site.RegularPages "Type" "blog") "File.Dir" "archive/" }}
+        <article>
+          <div>
+            <h2><a class="title is-3" href="{{ .RelPermalink }}"><i class="fas fa-file"></i> {{ .Title }}</a></h2>
+            <p></p>
+          </div>
+          <p>&nbsp
+          </p>
+          <p>
+          {{ .Summary }}
+          </p>
+          {{ if .Truncated }}
+          <div>
+              <i class="fas fa fa-bookmark"></i><a class="is-italic" href="{{ .RelPermalink }}"> Read More…</a>
+            </p>
+          </div>
+          {{ end }}
+        </article>
+    {{ end }}
+  </div>
+  </main>
+{{ end }}

@@ -1,0 +1,25 @@
+<head>
+    {{- /* metadata */}}
+    <title>{{ if .IsHome }}Home : {{ else }}{{ if .Page.Title }}{{ .Page.Title }} : {{ end }}{{ end }}{{ .Site.Title }}</title>
+    <meta charset="utf-8">
+    <meta name="description" content="{{ .Params.Description }}" />
+    <meta name="dc.relation" content="{{ .Site.BaseURL }}" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    {{- /* css */}}
+    {{ $sass := resources.Get "css/base/base.scss" }}
+    {{ $sass_bulma := $sass | resources.ToCSS | resources.Fingerprint }}
+    <link rel="stylesheet" href="{{ $sass_bulma.Permalink }}" integrity="{{ $sass_bulma.Data.Integrity }}">
+
+    {{ if resources.Match "css/extra/*.css" }}
+    {{ $extra := (resources.Match "css/extra/*.css") | resources.Concat "assets/css/extra.css" }}
+    <link rel="stylesheet" href="{{ $extra.RelPermalink }}" media="screen">
+    {{ end }}
+
+    {{- /* icons */}}
+    {{ if .Site.Params.fontawesomeToken }}
+    <script src="https://kit.fontawesome.com/{{ .Site.Params.fontawesomeToken }}.js" crossorigin="anonymous"></script>
+    {{ end }}
+
+    <link rel="shortcut icon" type="image/x-icon" href="/img/{{ .Site.Params.favicon }}">
+</head>

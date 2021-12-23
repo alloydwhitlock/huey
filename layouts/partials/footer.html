@@ -1,0 +1,19 @@
+<footer class="footer">
+  <div class="content has-text-centered">
+    <layer>
+      {{ if .Site.Menus.social }}
+        {{ range .Site.Menus.social }}
+        <a class="footer-social" href="{{ .URL }}">{{ .Pre }}</a>
+        {{ end }}
+      {{ end }}
+    </layer>
+    <layer>
+      <p>
+        Website theme is <a class="has-text-weight-semibold" href="http://github.com/alloydwhitlock/huey">Huey</a> by <a class="has-text-weight-semibold" href="https://adamwhitlock.com">Adam Whitlock</a>.
+      </p>
+      <p>
+         &copy; {{ now.Format "2006"}} Adam Whitlock
+      </p>
+    </layer>
+  </div>
+</footer>

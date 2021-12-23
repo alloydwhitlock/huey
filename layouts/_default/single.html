@@ -1,0 +1,18 @@
+{{ define "main"}}
+  <!-- content -->
+  <div class="content is-normal">
+      <div class="level">
+      </div>
+      <!-- published date --> 
+      <p class="title is-3"><i class="fas fa-file"></i> {{.Page.Title}}</p>
+      <p class="subtitle is-4">{{.Page.Description}}</p>
+      {{ $dateFormat := .Site.Params.dateFormat | default "January 2, 2006"}}
+      <p class="date">Published on {{ .PublishDate.Format $dateFormat }}{{ if ne .Lastmod .PublishDate }}, last updated on {{ .Lastmod.Format $dateFormat }}
+      {{ end }}
+      </p>
+       
+
+
+    {{ .Content }}
+  </div>
+{{ end }}

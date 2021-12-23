@@ -1,0 +1,25 @@
+// modified Bulma default variables 
+
+@import "../bulma/sass/utilities/initial-variables";
+@import "../bulma/sass/utilities/functions";
+
+// fonts
+$family-san-serif: "Helvetica", "Arial", san-serif;
+$family-primary: $family-san-serif;
+
+
+
+// colors
+$scheme-main: #bbb; // set background color
+$link: #000; // main link color
+$link-hover: #444;
+$footer-background-color: false;  // removes background color in footer
+
+
+// navigation
+// $navbar-link-color: #ffff00;
+$navbar-item-hover-color: #444;
+$navbar-item-color: #888;
+
+
+@import "../bulma/";

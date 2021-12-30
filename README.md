@@ -9,9 +9,8 @@ The name "Huey" was taken from the musician "Baby Huey". The record was on the m
 ## TODO
 This is the author's current TODO list for Huey. It won't impact your use of Huey. If you run into an issue and it's in the list, be assurred it's being looked into.
 
-- Current page in navigaiton
-- Current title + main page title
-- RSS (index.xml)
+- Children pages will show active for parent in menu
+
 
 ## Theme Configuration
 
@@ -72,17 +71,33 @@ theme = "huey"
 canonifyurls = true
 
 [params]
-    author = "Author's name goes here"
-    dateFormat = "January 2, 2006"
-    description = "This is a description of your site. This is also used in your site header metadata."
-    keywords = ""
-    email = "adam@adamwhitlock.com"
+  # General site metadata, used in header and other places
+  author = "Author's name goes here"
+  dateFormat = "January 2, 2006"
+  description = "This is a description of your site. This is also used in your site header metadata."
+  keywords = ""
+  email = "adam@adamwhitlock.com"
 
-    # Use your Font Awesome token here. Example token is fake, so please get your own.
-    fontawesomeToken = "018de52a07"
+  # Use your Font Awesome token here. Example token is fake, so please get your own.
+  fontawesomeToken = "018de52a07"
 
-    favicon = "favicon.ico"
-    staticDir = ['static']
+  # Navigation, use Bulma options here
+  navbarStyle = "is-transparent" # Default is "is-transparent"
+  navbarTitleStyle = "has-text-black" # Default is "has-text-black"
+
+  # Override Bulma schemes with values
+  schemeMain = ""
+  link = "#000" # Default is blue
+  linkHover = "#000" # Default is darker-grey
+  footerBackground = "false" # Default is true
+  footerBackgroundColor = "false" # Default is #fafafa
+  navbarItemHoverColor = "#444" # Default is link color, which unchanged is blue
+  navbarItemColor = "#888" # Default is text color
+
+  # Set static directory locations and favicon
+  favicon = "favicon.ico"
+  staticDir = ['static']
+
 
 [menu]
 
@@ -100,13 +115,6 @@ canonifyurls = true
   title = "Archive"
   url = '/archive/'
   weight = 20
-
-[[menu.nav]]
-  identifier = 'contact'
-  name = 'Contact'
-  title = "Contact"
-  url = '/contact/'
-  weight = 30
 
 # Contacts
 
@@ -144,6 +152,7 @@ canonifyurls = true
 
 Huey pages require that you specify a `type: pages` and `layout: page` for any page that's standalone (Examples: Contact, About Me). This will remove the "date" field from those pages, along with letting you specify an optional Font Awesome icon next to the page title. Unlike how Font Awesome icons are used in the configuration, you only need to put the short Font Awesome codes on your page front matter (the metadata at the top of a post).
 
+Specifying the `menu:nav` and `weight: weight-value`, as seen in the example, will ensure additional pages you create appear in navigation. If declared properly, the active page should be darker in the menu.
 
 Example Layout for Individual Page
 
@@ -156,6 +165,8 @@ url: /about/
 type: pages
 layout: page
 fa_icon: "fas fa-user"
+menu: nav
+weight: 20
 
 ---
 

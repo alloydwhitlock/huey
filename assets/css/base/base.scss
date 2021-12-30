@@ -13,5 +13,4 @@ $footer-background-color: {{ .Site.Params.footerBackgroundColor | default "#fafa
 $navbar-item-hover-color: {{ .Site.Params.navbarItemHoverColor | default "$link;"}};
 $navbar-item-color: {{ .Site.Params.navbarItemColor | default "$text"}};
 
-
 @import "../bulma/";

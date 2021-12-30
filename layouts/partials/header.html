@@ -11,13 +11,11 @@
   <div id="navbar-menu" class="navbar-menu">
     <div class="navbar-end">
         {{ range .Site.Menus.nav }}
-        <a class="navbar-item{{if or ($currentPage.IsMenuCurrent "nav" .) ($currentPage.HasMenuCurrent "nav" .) }}{{end}}" href="{{.URL}}"  >{{ .Name }}</a>
+        <a class="navbar-item{{if or ($currentPage.IsMenuCurrent "nav" .) ($currentPage.HasMenuCurrent "nav" .) }} is-active{{end}}" href="{{.URL}}"  >{{ .Name }}</a>
         {{ end }}
     </div>
   </div>
 </nav>
-
-
 
 
 <!-- is-active for navbar-menu class -->

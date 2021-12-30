@@ -1,5 +1,6 @@
 {{ define "main"}}
-  <div class="content is-normal">
+<main aria-role="main">
+  <div class="content is-normal mx-3">
       <p class="title is-3"><i class="fas fa-file"></i> {{.Page.Title}}</p>
       <p class="subtitle is-4">{{.Page.Description}}</p>
       {{ $dateFormat := .Site.Params.dateFormat | default "January 2, 2006"}}
@@ -8,4 +9,5 @@
       </p>
     {{ .Content }}
   </div>
+</main>
 {{ end }}

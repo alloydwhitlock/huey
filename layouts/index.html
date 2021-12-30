@@ -1,17 +1,13 @@
 {{ define "main" }}
   <main aria-role="main">
-  <div class="homepage-content is-normal">
+  <div class="content is-normal mx-3">
       {{.Content}}
-  </div>
-  <div>
-    {{ range where (where .Site.RegularPages "Type" "blog") "File.Dir" "archive/" }}
+      {{ range where (where .Site.RegularPages "Type" "blog") "File.Dir" "archive/" }}
         <article>
           <div>
             <h2><a class="title is-3" href="{{ .RelPermalink }}"><i class="fas fa-file"></i> {{ .Title }}</a></h2>
-            <p></p>
           </div>
-          <p>&nbsp
-          </p>
+
           <p>
           {{ .Summary }}
           </p>

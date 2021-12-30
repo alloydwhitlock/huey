@@ -202,6 +202,6 @@ Font Awesome is not stored within the theme, so network access to the Font Aweso
 
 ## Theme Customization
 
-If you want to change the colors that Huey uses, the best location is `assets/css/base/base.scss`. Huey uses Bulma, which itself uses Sass for generating CSS. This file will apply changes to Bulma CSS and generate what is ultimately created in your `public` folder.
+If you want to change the colors that Huey uses, the best location is `assets/css/base/base.scss`. Huey uses Bulma, which itself uses Sass for generating CSS. This file will apply changes to Bulma CSS and generate what is ultimately created in your `public` folder. However, there are a number of Bulma variables already configurable in the `[Params]` table, which means you don't need to edit this file directly. Only edit it directly if you need to make changes.
 
 If you want to add new CSS definitions that don't exist in Bulma, add them to `assets/css/extra/extra.css` or copy CSS files to the `assets/css/extra` folder. Huey will read any CSS files in that folder.

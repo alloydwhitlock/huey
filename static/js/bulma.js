@@ -1,3 +1,5 @@
+// This javascript was used, without modification, from the Bulma CSS framework documentation.
+
 document.addEventListener('DOMContentLoaded', () => {
 
   // Get all "navbar-burger" elements

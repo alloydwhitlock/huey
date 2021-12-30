@@ -7,8 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     {{- /* css */}}
-    {{ $sass := resources.Get "css/base/base.scss" }}
-    {{ $sass_bulma := $sass | resources.ToCSS | resources.Fingerprint }}
+    {{ $sass := resources.Get "css/base/base.scss" | resources.ExecuteAsTemplate "style.scss" .  }}
+    {{ $sass_bulma := $sass | resources.ToCSS | minify | resources.Fingerprint }}
     <link rel="stylesheet" href="{{ $sass_bulma.Permalink }}" integrity="{{ $sass_bulma.Data.Integrity }}">
 
     {{ if resources.Match "css/extra/*.css" }}

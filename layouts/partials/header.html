@@ -1,25 +1,23 @@
 {{ $currentPage := . }}
-<div class="container">
-  <div class="level">
-    <div class="level-left ">
-      <div class="level-item">
-        <p class="title is-4">
-          <a href="{{ .Site.BaseURL }}" class="title">{{.Site.Title}}</a>
-        </p>
-      </div>
-
-    </div>
-    <div class="level-right">
-      <div class="level-item">
-        <nav class="navbar is-transparent" role="navigation" aria-label="main navigation">
-        <div class="navbar-brand has-text-weight-semibold">
+<nav class="navbar {{ .Site.Params.navbarStyle }} mb-4" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a class="navbar-item title {{ .Site.Params.navbarTitleStyle | default "has-text-black" }}" href="{{ .Site.BaseURL }}">{{.Site.Title}}</a>
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbar-menu">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+  <div id="navbar-menu" class="navbar-menu">
+    <div class="navbar-end">
         {{ range .Site.Menus.nav }}
-        <a class="navbar-item{{if or ($currentPage.IsMenuCurrent "nav" .) ($currentPage.HasMenuCurrent "nav" .) }} is-active{{end}}" href="{{.URL}}"  >{{ .Name }}</a>
+        <a class="navbar-item{{if or ($currentPage.IsMenuCurrent "nav" .) ($currentPage.HasMenuCurrent "nav" .) }}{{end}}" href="{{.URL}}"  >{{ .Name }}</a>
         {{ end }}
-        </div>
-        </nav>
-      </div>
     </div>
   </div>
-  <div class="level"></div>
-</div>
+</nav>
+
+
+
+
+<!-- is-active for navbar-menu class -->

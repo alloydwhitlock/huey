@@ -2,8 +2,14 @@
   <div class="content has-text-centered">
     <layer>
       {{ if .Site.Menus.social }}
-        {{ range .Site.Menus.social }}
-        <a class="footer-social" href="{{ .URL }}">{{ .Pre }}</a>
+        {{ if .Site.Params.fontawesomeToken }}
+          {{ range .Site.Menus.social }}
+          <a class="footer-social" href="{{ .URL }}">{{ .Pre }}</a>
+          {{ end }}
+        {{ else }}
+          {{ range .Site.Menus.social }}
+          <a class="footer-social" href="{{ .URL }}">{{ .Name }}</a>
+          {{ end }}
         {{ end }}
       {{ end }}
     </layer>

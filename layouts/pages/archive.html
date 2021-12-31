@@ -1,20 +1,24 @@
 {{ define "main"}}
-  <main aria-role="main">
-
-
-  <div class="content mx-3">
-  <p class="title is-3"><i class="fas fa-archive"></i>
-    {{.Page.Title}}
-  </p>
-  {{ .Content }}
+<main aria-role="main">
+  <div class="section">
+    <div class="columns">
+      <div class="column">
+        <div class="content">
+          <p class="title is-3"><i class="fas fa-archive"></i>
+            {{.Page.Title}}
+          </p>
+          {{ .Content }}
+          <ul class="fa-ul">
+            {{ range .Pages.ByLastmod }}
+                <li>
+                    <span class="fa-li"><i class="fas fa fa-file"></i></span><a href="{{ .Permalink }}">{{ .Title }}{{ if .Description }}: {{ .Description}}{{ end }}</a>
+                    <p>Posted on <time>{{ .Date.Format "Mon, Jan 2, 2006" }}</time></p>
+                </li>
+            {{ end }}
+          </ul>
+        </div>
+      </div>
+    </div>
   </div>
-  <ul class="fa-ul"> 
-      {{ range .Pages.ByLastmod }}
-          <li>
-              <span class="fa-li"><i class="fas fa fa-file"></i></span><a href="{{ .Permalink }}">{{ .Title }}{{ if .Description }}: {{ .Description}}{{ end }}</a>
-              <p>Posted on <time>{{ .Date.Format "Mon, Jan 2, 2006" }}</time></p>
-          </li>
-      {{ end }}
-  </ul>
-  </main>
+</main>
 {{ end }}

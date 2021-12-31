@@ -1,19 +1,19 @@
 # Huey
-The Hugo theme Huey
+A minimal Hugo blog template using Bulma CSS
 
+## Questions
 
-## Why is it named Huey?
+### Why is it Named Huey?
 The name "Huey" was taken from the musician "Baby Huey". The record was on the mantle when the theme author was trying to come up with a name. The album cover for "The Baby Huey Story: The Living Legend" is used as the default `favicon.ico` for this theme.
 
+### Why Use Bulma for CSS?
+Bulma is a great framework for starting off sites. It's pure CSS, meaning you don't need to bring in Javascript (unless you want to). This was also meant as an exercise for the author to learn Bulma CSS and how Sass works.
 
-## TODO
-This is the author's current TODO list for Huey. It won't impact your use of Huey. If you run into an issue and it's in the list, be assurred it's being looked into.
-
-- Children pages will show active for parent in menu
+### Why Doesn't Huey use "X" Bulma feature?
+This is meant to be "minimal". Only add features needed for a slim site and when necessary. If you want a full-featured Bulma theme meant to provide everything Bulma offers, check out [hugo-bulma](https://github.com/wayn3h0/hugo-bulma).
 
 
 ## Theme Configuration
-
 Huey comes with a number of configuration options. Read through this section for more details, along with a boilerplate configuration that can be used to get started.
 
 ### Font Awesome
@@ -216,3 +216,9 @@ Font Awesome is not stored within the theme, so network access to the Font Aweso
 If you want to change the colors that Huey uses, the best location is `assets/css/base/base.scss`. Huey uses Bulma, which itself uses Sass for generating CSS. This file will apply changes to Bulma CSS and generate what is ultimately created in your `public` folder. However, there are a number of Bulma variables already configurable in the `[Params]` table, which means you don't need to edit this file directly. Only edit it directly if you need to make changes.
 
 If you want to add new CSS definitions that don't exist in Bulma, add them to `assets/css/extra/extra.css` or copy CSS files to the `assets/css/extra` folder. Huey will read any CSS files in that folder.
+
+
+## TODO
+This is the author's current TODO list for Huey. It won't impact your use of Huey. If you run into an issue and it's in the list, be assurred it's being looked into.
+
+- Children pages will show active for parent in menu

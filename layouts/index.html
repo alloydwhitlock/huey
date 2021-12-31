@@ -1,24 +1,41 @@
 {{ define "main" }}
-  <main aria-role="main">
-  <div class="content is-normal mx-3">
-      {{.Content}}
-      {{ range where (where .Site.RegularPages "Type" "blog") "File.Dir" "archive/" }}
-        <article>
-          <div>
-            <h2><a class="title is-3" href="{{ .RelPermalink }}"><i class="fas fa-file"></i> {{ .Title }}</a></h2>
-          </div>
+<main aria-role="main">
+  <section class="hero ">
+    <div class="hero-body">
+      <div class="container">
 
-          <p>
-          {{ .Summary }}
-          </p>
-          {{ if .Truncated }}
-          <div>
-              <i class="fas fa fa-bookmark"></i><a class="is-italic" href="{{ .RelPermalink }}"> Read More…</a>
-            </p>
+        <!-- first post content -->
+        {{ range first 3 (where (where .Site.RegularPages "Type" "blog") "File.Dir" "archive/") }}
+        <div class="columns">
+          <div class="column">
+            <figure class="image">
+            </figure>
           </div>
-          {{ end }}
-        </article>
-    {{ end }}
-  </div>
-  </main>
+        </div>
+
+        <div class="section">
+          <div class="columns">
+            <div class="column">
+              <div class="content">
+                <h1 class="title"><a class="" href="{{ .RelPermalink }}"> {{ .Title }}</a></h1>
+                <p>{{ .Summary }}</p>
+                {{ if .Truncated }}
+                  <div>
+                    <i class="fas fa fa-bookmark"></i><a class="is-italic" href="{{ .RelPermalink }}"> Read More…</a>
+                  </p>
+                {{ end }}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        {{ end }}
+
+      </div>
+    </div>
+  </section>
+
+</main>
 {{ end }}
+
+

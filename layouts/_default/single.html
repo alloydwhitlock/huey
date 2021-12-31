@@ -1,6 +1,12 @@
 {{ define "main"}}
 <main aria-role="main">
   <div class="content is-normal mx-3">
+     <figure class="image ">
+      {{ with .Resources.GetMatch "header.jpg" }}
+        <img src="data:{{ .MediaType }};base64,{{ .Content | base64Encode }}">
+      {{ end }}
+      </figure>
+
       <p class="title is-3"><i class="fas fa-file"></i> {{.Page.Title}}</p>
       <p class="subtitle is-4">{{.Page.Description}}</p>
       {{ $dateFormat := .Site.Params.dateFormat | default "January 2, 2006"}}

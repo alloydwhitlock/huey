@@ -12,6 +12,13 @@ Bulma is a great framework for starting off sites. It's pure CSS, meaning you do
 ### Why Doesn't Huey use "X" Bulma feature?
 This is meant to be "minimal". Only add features needed for a slim site and when necessary. If you want a full-featured Bulma theme meant to provide everything Bulma offers, check out [hugo-bulma](https://github.com/wayn3h0/hugo-bulma).
 
+### How Can I Contribute?
+File a pull request in the Huey theme repository. Preferably create a Github Issue which addresses a problem that needs to be solved, then submit a PR fixing it.
+
+
+## How Can I Get New Features?
+If you need or want new functionality, please create a new issue on Github in the Huey project.
+
 
 ## Theme Configuration
 Huey comes with a number of configuration options. Read through this section for more details, along with a boilerplate configuration that can be used to get started.
@@ -81,18 +88,20 @@ canonifyurls = true
   # Use your Font Awesome token here. Example token is fake, so please get your own.
   fontawesomeToken = "018de52a07"
 
-  # Navigation, use Bulma options here
-  navbarStyle = "is-transparent" # Default is "is-transparent"
-  navbarTitleStyle = "has-text-black" # Default is "has-text-black"
+  # Use content from _index.md on homepage
+  # useIndexContent = true # default is false
 
-  # Override Bulma schemes with values
-  schemeMain = ""
-  link = "#000" # Default is blue
-  linkHover = "#000" # Default is darker-grey
-  footerBackground = "false" # Default is true
-  footerBackgroundColor = "false" # Default is #fafafa
-  navbarItemHoverColor = "#444" # Default is link color, which unchanged is blue
-  navbarItemColor = "#888" # Default is text color
+  # Navigation, use Bulma options here
+  # navbarStyle = "is-transparent" # Default is "is-transparent"
+  # navbarTitleStyle = "has-text-black" # Default is "has-text-black"
+
+  # # Override Bulma schemes with values
+  # schemeMain = "" # Change background color, default is white
+  # link = "#000" # Bulma default is blue, though theme is black
+  # linkHover = "#888" # Bulma default is grey-darker, though theme is #888
+  # footerBackgroundColor = "false" # Bulma default is #fafafa. You can use "false" or #hex
+  # navbarItemHoverColor = "#444" # Bulma default is blue, though theme is #444
+  # navbarItemColor = "#888" # Bulma default is grey-dark, though theme is #888
 
   # Set static directory locations and favicon
   favicon = "favicon.ico"
@@ -219,6 +228,6 @@ If you want to add new CSS definitions that don't exist in Bulma, add them to `a
 
 
 ## TODO
-This is the author's current TODO list for Huey. It won't impact your use of Huey. If you run into an issue and it's in the list, be assurred it's being looked into.
+This is the author's current TODO list for Huey. It won't impact your use of Huey. If you run into an issue and it's in the list, be assured it's being looked into.
 
 - Children pages will show active for parent in menu

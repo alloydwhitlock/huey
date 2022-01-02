@@ -5,13 +5,13 @@
       <div class="column">
         <div class="content">
           <p class="title is-3"><i class="fas fa-archive"></i>
-            {{.Page.Title}}
+            {{.Page.Title | title}}
           </p>
           {{ .Content }}
           <ul class="fa-ul">
             {{ range .Pages.ByLastmod }}
                 <li>
-                    <span class="fa-li"><i class="fas fa fa-file"></i></span><a href="{{ .Permalink }}">{{ .Title }}{{ if .Description }}: {{ .Description}}{{ end }}</a>
+                    <span class="fa-li"><i class="fas fa fa-file"></i></span><a href="{{ .Permalink }}">{{ .Title | title }}{{ if .Description }}: {{ .Description}}{{ end }}</a>
                     <p>Posted on <time>{{ .Date.Format "Mon, Jan 2, 2006" }}</time></p>
                 </li>
             {{ end }}

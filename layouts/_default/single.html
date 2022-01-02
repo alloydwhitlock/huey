@@ -1,19 +1,24 @@
 {{ define "main"}}
 <main aria-role="main">
-  <div class="content is-normal mx-3">
-     <figure class="image ">
-      {{ with .Resources.GetMatch "header.jpg" }}
-        <img src="data:{{ .MediaType }};base64,{{ .Content | base64Encode }}">
-      {{ end }}
-      </figure>
-
-      <p class="title is-3"><i class="fas fa-file"></i> {{.Page.Title}}</p>
-      <p class="subtitle is-4">{{.Page.Description}}</p>
-      {{ $dateFormat := .Site.Params.dateFormat | default "January 2, 2006"}}
-      <p class="date">Published on {{ .PublishDate.Format $dateFormat }}{{ if ne .Lastmod .PublishDate }}, last updated on {{ .Lastmod.Format $dateFormat }}
-      {{ end }}
-      </p>
-    {{ .Content }}
+  <div class="section">
+    <div class="columns">
+      <div class="column">
+        <div class="content">
+         <figure class="image ">
+          {{ with .Resources.GetMatch "header.jpg" }}
+            <img src="data:{{ .MediaType }};base64,{{ .Content | base64Encode }}">
+          {{ end }}
+          </figure>
+          <p class="title is-3">{{.Page.Title | title }}</p>
+          <p class="subtitle is-4">{{.Page.Description}}</p>
+          {{ $dateFormat := .Site.Params.dateFormat | default "January 2, 2006"}}
+          <p class="date">Published on {{ .PublishDate.Format $dateFormat }}{{ if ne .Lastmod .PublishDate }}, last updated on {{ .Lastmod.Format $dateFormat }}
+          {{ end }}
+          </p>
+          {{ .Content }}
+        </div>
+      </div>
+    </div>
   </div>
 </main>
 {{ end }}

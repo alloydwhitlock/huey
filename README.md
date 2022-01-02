@@ -1,3 +1,5 @@
+![Screenshot of a website using Huey](https://github.com/alloydwhitlock/huey/blob/main/images/tn.png)
+
 # Huey
 A minimal Hugo blog template using Bulma CSS
 

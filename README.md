@@ -22,6 +22,34 @@ File a pull request in the Huey theme repository. Preferably create a Github Iss
 If you need or want new functionality, please create a new issue on Github in the Huey project.
 
 
+## Installation
+
+### Prerequisites
+
+- A Hugo site has been initialized or cloned. Example: `hugo new site <site name>`
+- Git installed in development environment
+- Github access available
+
+### Method 1: Clone in Themes Directory
+
+The simplest method of instlaling Huey is cloning the Huey directly into the site `themes/huey` directory. Below is a command that can be copied & pasted into a temrinal to clone the Huey theme.
+
+
+```git clone https://github.com/alloydwhitlock/huey/ --depth=1```
+
+If you use Huey cloned directly, you will need to run `git pull` within `themes/huey` for updating to the most recent version.
+
+
+### Method 2: Use Git Submodule
+
+Git Submodule allows you to have one git repository located within another. This lets you separate what your working site directoy will be from the Huey theme, as an example. It's a great choice when you have an external component you don't fully control, since it locks the repository reference to the specific commit you used.
+
+```git submodule add https://github.com/alloydwhitlock/huey/ themes/huey --depth=1```
+
+If you use Huey as a submodule, you will need to run `git submodule update --remote --merge` when updating the most more recent version.
+
+
+
 ## Theme Configuration
 Huey comes with a number of configuration options. Read through this section for more details, along with a boilerplate configuration that can be used to get started.
 
@@ -161,7 +189,7 @@ canonifyurls = true
 
 ### Layout for Individual Pages
 
-Huey pages require that you specify a `type: pages` and `layout: page` for any page that's standalone (Examples: Contact, About Me). This will remove the "date" field from those pages, along with letting you specify an optional Font Awesome icon next to the page title. Unlike how Font Awesome icons are used in the configuration, you only need to put the short Font Awesome codes on your page front matter (the metadata at the top of a post).
+Huey pages require that you specify a `type: pages` and `layout: page` for any page that's standalone (Examples: Contact, About Me). This will remove the "date" field from those pages, along with letting you specify an optional Font Awesome icon next to the page title. Unlike how Font Awesome icons are used in the configuration, you only need to put the short Font Awesome codes on your page front matter (the metadata at the top of a post).S
 
 Specifying the `menu:nav` and `weight: weight-value`, as seen in the example, will ensure additional pages you create appear in navigation. If declared properly, the active page should be darker in the menu.
 
@@ -185,8 +213,12 @@ Content text goes here...
 
 ```
 
+To add an icon next to a page title, use `fa_icon:` key where the value is the Font Awesome icon code. Example: `fa_icon: fas fa-user`
+
 
 ### Layout for Blog Posts
+
+#### Post Front Matter
 
 Blog posts only need the type `blog` specified in a page front matter, which allows new posts to appear on the main home page. If you don't want a post to appear on the home page, it's possible to hide them by ignoring the type or setting it to another (Example: post).
 
@@ -213,6 +245,40 @@ Content text goes here...
 
 
 There is not an option for Font Awesome codes with blog posts. If you need/want this functionality please create a new issue on Github in the Huey project.
+
+#### Header Images & Content
+
+When using Huey as a theme, it's suggested to use page bundles. These allow for a content author to include all relevant content within a folder. Pages can reference bundle content directly. Below is an example of a page bundle layout:
+
+
+```
+hugo-site
+├── content/
+│ ├── posts/
+│ │ ├── new_post/
+│ │ │ ├── header.png
+│ │ │ ├── image1.png
+│ │ │ └── index.md
+│ │ ├── _index.md
+...
+
+```
+
+Post bundles require an `index.md` for the bundle folder, which will contain the content of the post. See [Page Bundles](https://gohugo.io/content-management/page-bundles/) on Hugo for more information.
+
+
+##### Header Image (Front Page & Posts Page)
+
+Huey will use any picture named "header.jpg" or "header.png" that's included within a page bundle. This picture is used on the front home page and the posts (blog posts) page. If you do not include an image meeting the naming convention, then no image will be used for the header.
+
+
+##### Images & Other Content
+
+You can reference any content in the page bundle, such as additional images, in your markdown files using a relative path. Example:
+
+```
+![Image alt text](image1.png)
+```
 
 
 ## Site Local Assets and Online Dependencies

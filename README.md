@@ -280,6 +280,21 @@ You can reference any content in the page bundle, such as additional images, in 
 ![Image alt text](image1.png)
 ```
 
+##### Shortcodes
+
+###### Centered Text
+
+Example:
+
+{{% center %}}Text to be centered{{% /center %}}
+
+
+###### Centered Image
+
+{{% center-image
+src="x400_board.png"
+alt="This is sample image" %}}
+
 
 ## Site Local Assets and Online Dependencies
 

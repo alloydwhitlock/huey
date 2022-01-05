@@ -22,7 +22,7 @@
         <div class="columns">
           <div class="column">
             <figure class="image ">
-              {{ with .Resources.GetMatch "header.jpg" }}
+              {{ with .Resources.GetMatch "header.*" }}
                 <img src="data:{{ .MediaType }};base64,{{ .Content | base64Encode }}">
               {{ end }}
             </figure>

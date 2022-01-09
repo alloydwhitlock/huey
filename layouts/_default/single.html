@@ -13,11 +13,11 @@
     <div class="columns">
       <div class="column">
         <div class="content">
-          <p class="title is-3">{{.Page.Title | title }}</p>
+          <h1 class="title is-3">{{.Page.Title | title }}</h1>
+          <h2 class="subtitle is-5"><time>{{ .Date.Format "Jan 2, 2006" }}</time></h2>
+          {{ $dateFormat := .Site.Params.dateFormat | default "January 2, 2006"}}{{ if ne .Lastmod .PublishDate }}, last updated on {{ .Lastmod.Format $dateFormat }}{{ end }}
           <p class="subtitle is-4">{{.Page.Description}}</p>
-          {{ $dateFormat := .Site.Params.dateFormat | default "January 2, 2006"}}
-          <p class="date">Published on {{ .PublishDate.Format $dateFormat }}{{ if ne .Lastmod .PublishDate }}, last updated on {{ .Lastmod.Format $dateFormat }}
-          {{ end }}
+          <p class="date">Published on {{ .PublishDate.Format $dateFormat }}
           </p>
           {{ .Content }}
         </div>

@@ -296,6 +296,25 @@ src="x400_board.png"
 alt="This is sample image" %}}
 
 
+## Addiitonal Scripts
+
+Huey supports loading scripts after the footer loads (Example: Javascript for site analytics). Adding new code directly to Huey's existing `huey/layouts/partials/scripts.html` is the fastest method to get started. However, to maintain core site code separate from your theme create a `layouts/partials/scripts.html` file in the base site directory. When generating a new site, Hugo will load the base folder `scripts.html` accoording to the order of precedence.
+
+Example Layout Showing New scripts.html:
+
+```
+hugo-site
+├── layouts/
+├── partials/
+│└── scripts.html
+... more files ...
+├── themes/
+│└── huey/
+...
+
+```
+
+
 ## Site Local Assets and Online Dependencies
 
 Bulma CSS is stored as part of the project theme, in `assets/css/bulma`. This ensures you can move your site around without needing network access. If a newer version of Bulma is necessary, either replace the Bulma CSS directory completely or use a public Bulma CSS location. The location is specified in `layouts/partials/head.html`.

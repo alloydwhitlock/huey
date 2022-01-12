@@ -296,7 +296,7 @@ src="x400_board.png"
 alt="This is sample image" %}}
 
 
-## Addiitonal Scripts
+## Additional Scripts
 
 Huey supports loading scripts after the footer loads (Example: Javascript for site analytics). Adding new code directly to Huey's existing `huey/layouts/partials/scripts.html` is the fastest method to get started. However, to maintain core site code separate from your theme create a `layouts/partials/scripts.html` file in the base site directory. When generating a new site, Hugo will load the base folder `scripts.html` accoording to the order of precedence.
 

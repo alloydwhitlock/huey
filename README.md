@@ -32,7 +32,7 @@ If you need or want new functionality, please create a new issue on Github in th
 
 ### Method 1: Clone in Themes Directory
 
-The simplest method of instlaling Huey is cloning the Huey directly into the site `themes/huey` directory. Below is a command that can be copied & pasted into a temrinal to clone the Huey theme.
+The simplest method of installing Huey is cloning the Huey directly into the site `themes/huey` directory. Below is a command that can be copied & pasted into a terminal to clone the Huey theme.
 
 
 ```git clone https://github.com/alloydwhitlock/huey/ --depth=1```
@@ -42,7 +42,7 @@ If you use Huey cloned directly, you will need to run `git pull` within `themes/
 
 ### Method 2: Use Git Submodule
 
-Git Submodule allows you to have one git repository located within another. This lets you separate what your working site directoy will be from the Huey theme, as an example. It's a great choice when you have an external component you don't fully control, since it locks the repository reference to the specific commit you used.
+Git Submodule allows you to have one git repository located within another. This lets you separate what your working site directory will be from the Huey theme, as an example. It's a great choice when you have an external component you don't fully control, since it locks the repository reference to the specific commit you used.
 
 ```git submodule add https://github.com/alloydwhitlock/huey/ themes/huey --depth=1```
 

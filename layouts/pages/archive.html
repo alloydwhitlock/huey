@@ -9,7 +9,7 @@
           </p>
           {{ .Content }}
           <ul class="fa-ul">
-            {{ range .Pages.ByDate }}
+            {{ range .Pages.ByPublishDate.Reverse }}
                 <li>
                     <span class="fa-li"><i class="fas fa fa-file"></i></span><a href="{{ .Permalink }}">{{ .Title | title }}{{ if .Description }}: {{ .Description}}{{ end }}</a>
                     <p>Posted on <time>{{ .Date.Format "Mon, Jan 2, 2006" }}</time></p>

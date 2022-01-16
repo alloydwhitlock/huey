@@ -14,11 +14,8 @@
       <div class="column">
         <div class="content">
           <h1 class="title is-3">{{.Page.Title | title }}</h1>
-          <h2 class="subtitle is-5"><time>{{ .Date.Format "Jan 2, 2006" }}</time></h2>
-          {{ $dateFormat := .Site.Params.dateFormat | default "January 2, 2006"}}{{ if ne .Lastmod .PublishDate }}, last updated on {{ .Lastmod.Format $dateFormat }}{{ end }}
+          <h2 class="subtitle is-5"><time>{{ .Date.Format "January 2, 2006" }}{{ if ne .Lastmod .PublishDate }} / Updated {{ .Lastmod.Format "January 2, 2006" }}{{ end }}</time></h2>
           <p class="subtitle is-4">{{.Page.Description}}</p>
-          <p class="date">Published on {{ .PublishDate.Format $dateFormat }}
-          </p>
           {{ .Content }}
         </div>
       </div>

@@ -11,6 +11,13 @@
     {{ $sass_bulma := $sass | resources.ToCSS | minify | resources.Fingerprint }}
     <link rel="stylesheet" href="{{ $sass_bulma.Permalink }}" integrity="{{ $sass_bulma.Data.Integrity }}">
 
+
+    {{ $sass := resources.Get "css/extra/extra.scss" | resources.ExecuteAsTemplate "style.scss" .   }}
+    {{ $sass_extra := $sass | resources.ToCSS | minify | resources.Fingerprint }}
+    <link rel="stylesheet" href="{{ $sass_extra.Permalink }}" integrity="{{ $sass_extra.Data.Integrity }}">
+
+
+
     {{ if resources.Match "css/extra/*.css" }}
     {{ $extra := (resources.Match "css/extra/*.css") | resources.Concat "assets/css/extra.css" }}
     <link rel="stylesheet" href="{{ $extra.RelPermalink }}" media="screen">

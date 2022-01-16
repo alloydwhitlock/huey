@@ -1,0 +1,10 @@
+$scheme-main: {{ .Site.Params.schemeMain | default "#fff" }}; // default scheme, background color
+$linkBackground: {{ .Site.Params.linkBackground | default "none" }}; // default scheme, background color
+
+div.content a:link {
+  background: $linkBackground;
+}
+
+div.read-more a:link {
+      background: $scheme-main;
+}

@@ -1,10 +1,5 @@
 # Bulma Changelog
 
-## 0.9.4
-
-- Minor update
-
-
 ## 0.9.3
 
 ### New features

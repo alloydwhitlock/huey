@@ -5,7 +5,7 @@ description = "Huey is a minimal blog theme which uses the Bulma CSS framework"
 homepage = "https://www.adamwhitlock.com/"
 tags = ["blog", "light", "minimalist", "bulma", "blog"]
 features = ["responsive", "blog", "archive", "social"]
-min_version = "0.80.0" # Only tested with Hugo 0.80.0
+min_version = "0.80.0" # Tested with 0.80, latest used is 0.121.1
 
 [author]
   name = "Adam Whitlock"

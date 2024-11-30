@@ -1,27 +1,28 @@
 {{ define "main" }}
 <main aria-role="main">
-  <section class="hero ">
+  <section class="hero">
     <div class="hero-body">
       <div class="container">
 
-       <!-- index page content included from content folder -->
-       {{ if .Site.Params.useIndexContent }}
+        <!-- Index page content included from content folder -->
+        {{ if .Site.Params.useIndexContent }}
         <div class="columns">
           <div class="column">
             <div class="content">
-                <h1 class="title">{{ .Title | title }}</h1>
-                <p>{{ .Content }}</p>
+              <h1 class="title">{{ .Title | title }}</h1>
+              <p>{{ .Content }}</p>
             </div>
           </div>
         </div>
-        {{ end}}
+        {{ end }}
 
-
-        <!-- first post content -->
-        {{ range first 3 (where .Site.RegularPages "Type" "blog")  }}
+        <!-- Paginated blog posts -->
+        {{ $blogPages := where .Site.RegularPages "Type" "blog" }}
+        {{ $paginator := ($blogPages | .Paginate) }}
+        {{ range $paginator.Pages }}
         <div class="columns">
           <div class="column">
-            <figure class="image ">
+            <figure class="image">
               {{ with .Resources.GetMatch "header.*" }}
                 <img src="data:{{ .MediaType }};base64,{{ .Content | base64Encode }}">
               {{ end }}
@@ -29,30 +30,36 @@
           </div>
         </div>
 
-          <div class="columns">
-            <div class="column">
-                <p class="title"><a class="nope" href="{{ .RelPermalink }}"> {{ .Title | title }}</a></h1>
+        <div class="columns">
+          <div class="column">
+            <p class="title"><a class="nope" href="{{ .RelPermalink }}">{{ .Title | title }}</a></p>
 
-              <div class="content">
-                <h2 class="subtitle is-5"><time>{{ .Date.Format "January 2, 2006" }}{{ if ne .Lastmod .PublishDate }} / Updated {{ .Lastmod.Format "January 2, 2006" }}{{ end }}</time></h2>
-                <p class="subtitle is-4">{{.Page.Description}}</p>
-                <p>{{ .Summary }}</p>
-                {{ if .Truncated }}
-                  <div class="read-more">
-                    <i class="fas fa fa-bookmark"></i><a class="is-italic" href="{{ .RelPermalink }}"> Read More…</a>
-                  </p>
-                {{ end }}
-                </div>
+            <div class="content">
+              <h2 class="subtitle is-5"><time>{{ .Date.Format "January 2, 2006" }}{{ if ne .Lastmod .PublishDate }} / Updated {{ .Lastmod.Format "January 2, 2006" }}{{ end }}</time></h2>
+              <p class="subtitle is-4">{{ .Page.Description }}</p>
+              <p>{{ .Summary }}</p>
+              {{ if .Truncated }}
+              <div class="read-more">
+                <i class="fas fa fa-bookmark"></i><a class="is-italic" href="{{ .RelPermalink }}"> Read More…</a>
               </div>
+              {{ end }}
             </div>
+          </div>
         </div>
         {{ end }}
+
+        <!-- Pagination Navigation -->
+        <nav class="pagination" role="navigation" aria-label="pagination">
+          {{ if $paginator.HasPrev }}
+          <a class="pagination-previous" href="{{ $paginator.Prev.URL }}">Previous</a>
+          {{ end }}
+          {{ if $paginator.HasNext }}
+          <a class="pagination-next" href="{{ $paginator.Next.URL }}">See more</a>
+          {{ end }}
+        </nav>
 
       </div>
     </div>
   </section>
-
 </main>
 {{ end }}
-
-

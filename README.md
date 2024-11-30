@@ -138,6 +138,13 @@ canonifyurls = true
   staticDir = ['static']
 
 
+
+# Page Layout for Index
+[pagination]
+  disableAliases = false
+  pagerSize = 3
+  path = 'page'
+
 [menu]
 
 # Top Navigation
@@ -279,6 +286,9 @@ You can reference any content in the page bundle, such as additional images, in 
 ```
 ![Image alt text](image1.png)
 ```
+
+
+
 
 ##### Shortcodes
 

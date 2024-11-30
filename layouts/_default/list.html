@@ -1,0 +1,36 @@
+{{ define "main" }}
+<main aria-role="main">
+  <div class="section">
+    <div class="columns">
+      <div class="column">
+        <div class="content">
+          <h1 class="title is-3">Recent Posts</h1>
+          <ul class="fa-ul">
+            {{ range .Paginator.Pages }}
+              <li>
+                <span class="fa-li"><i class="fas fa fa-file"></i></span>
+                <a href="{{ .Permalink }}">{{ .Title | title }}</a>
+                <p>Published on <time>{{ .Date.Format "January 2, 2006" }}</time></p>
+              </li>
+            {{ end }}
+          </ul>
+
+          <!-- Pagination -->
+          <nav class="pagination" role="navigation" aria-label="pagination">
+            {{ if .Paginator.HasPrev }}
+              <a class="pagination-previous" href="{{ .Paginator.Prev.URL }}">Previous</a>
+            {{ else }}
+              <span class="pagination-previous is-disabled">Previous</span>
+            {{ end }}
+            {{ if .Paginator.HasNext }}
+              <a class="pagination-next" href="{{ .Paginator.Next.URL }}">See more</a>
+            {{ else }}
+              <span class="pagination-next is-disabled">See more</span>
+            {{ end }}
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+{{ end }}

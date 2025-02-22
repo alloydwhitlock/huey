@@ -8,12 +8,12 @@
 
     {{- /* css */}}
     {{ $sass := resources.Get "css/base/base.scss" | resources.ExecuteAsTemplate "style.scss" .  }}
-    {{ $sass_bulma := $sass | resources.ToCSS | minify | resources.Fingerprint }}
+    {{ $sass_bulma := $sass | css.Sass | minify | resources.Fingerprint }}
     <link rel="stylesheet" href="{{ $sass_bulma.Permalink }}" integrity="{{ $sass_bulma.Data.Integrity }}">
 
 
     {{ $sass := resources.Get "css/extra/extra.scss" | resources.ExecuteAsTemplate "style.scss" .   }}
-    {{ $sass_extra := $sass | resources.ToCSS | minify | resources.Fingerprint }}
+    {{ $sass_extra := $sass | css.Sass | minify | resources.Fingerprint }}
     <link rel="stylesheet" href="{{ $sass_extra.Permalink }}" integrity="{{ $sass_extra.Data.Integrity }}">
 
 

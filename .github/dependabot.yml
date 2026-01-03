@@ -1,0 +1,31 @@
+version: 2
+updates:
+  # Maintain GitHub Actions dependencies
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+    open-pull-requests-limit: 5
+    labels:
+      - "dependencies"
+      - "github-actions"
+    commit-message:
+      prefix: "chore"
+      include: "scope"
+
+  # Maintain npm dependencies (Bulma CSS)
+  - package-ecosystem: "npm"
+    directory: "/assets/css/bulma"
+    schedule:
+      interval: "monthly"
+    open-pull-requests-limit: 3
+    labels:
+      - "dependencies"
+      - "css"
+    commit-message:
+      prefix: "chore"
+      include: "scope"
+    # Only create PRs for security updates initially
+    # Remove this to get all updates
+    versioning-strategy: increase

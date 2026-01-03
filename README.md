@@ -26,9 +26,12 @@ If you need or want new functionality, please create a new issue on Github in th
 
 ### Prerequisites
 
+- Hugo version 0.154.2 or later (extended edition required for Sass/SCSS)
 - A Hugo site has been initialized or cloned. Example: `hugo new site <site name>`
 - Git installed in development environment
 - Github access available
+
+**Note:** For information about recent Hugo version updates, see [HUGO_UPGRADE_NOTES.md](HUGO_UPGRADE_NOTES.md)
 
 ### Method 1: Clone in Themes Directory
 
@@ -49,6 +52,58 @@ Git Submodule allows you to have one git repository located within another. This
 If you use Huey as a submodule, you will need to run `git submodule update --remote --merge` when updating the most more recent version.
 
 
+
+## Security
+
+### Security Headers
+
+For production deployments, it's highly recommended to configure security headers to protect your site from common web vulnerabilities. Huey includes example configuration files for popular hosting platforms.
+
+#### Supported Platforms
+
+**Netlify**
+- Use `netlify.toml` for comprehensive configuration including build settings and security headers
+- Or copy `_headers` to your `static/` directory for a simpler headers-only configuration
+
+**Cloudflare Pages**
+- Copy `_headers` to your `static/` directory
+
+**Vercel**
+- Use `vercel.json` for configuration including build settings and security headers
+
+**GitHub Pages**
+- GitHub Pages doesn't support custom headers natively
+- Consider using Cloudflare as a proxy to add security headers
+
+#### Included Security Headers
+
+The provided configurations include the following security headers:
+
+- **Content-Security-Policy**: Controls which resources can be loaded and executed
+- **X-Frame-Options**: Prevents clickjacking attacks
+- **X-Content-Type-Options**: Prevents MIME type sniffing
+- **X-XSS-Protection**: Enables browser XSS protection (for legacy browsers)
+- **Referrer-Policy**: Controls referrer information sent with requests
+- **Permissions-Policy**: Controls which browser features and APIs can be used
+- **Strict-Transport-Security**: Forces HTTPS connections (commented out by default)
+
+#### Customizing Security Headers
+
+The default Content-Security-Policy is configured for the standard Huey theme setup:
+- Font Awesome CDN (if enabled)
+- Google Fonts (if used)
+- Self-hosted content
+
+If you add additional external resources (analytics, social media embeds, etc.), you'll need to update the CSP accordingly. Refer to the comments in the configuration files for guidance.
+
+#### Testing Security Headers
+
+After deployment, test your security headers using:
+- [Mozilla Observatory](https://observatory.mozilla.org/)
+- [Security Headers](https://securityheaders.com/)
+- Browser developer tools (Network tab)
+
+For more information, see [SECURITY.md](SECURITY.md) for vulnerability reporting and security best practices.
 
 ## Theme Configuration
 Huey comes with a number of configuration options. Read through this section for more details, along with a boilerplate configuration that can be used to get started.

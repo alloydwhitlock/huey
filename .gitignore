@@ -11,5 +11,24 @@
 # Output of the go coverage tool, specifically when used with LiteIDE
 *.out
 
+# Hugo generated files
+public/
+resources/_gen/
+.hugo_build.lock
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Node modules (if rebuilding Bulma)
+node_modules/
+
 # Dependency directories (remove the comment below to include it)
 # vendor/

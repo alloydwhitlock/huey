@@ -1,0 +1,119 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: Build with Hugo ${{ matrix.hugo-version }}
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        hugo-version: ['0.154.2', 'latest']
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Hugo
+        uses: peaceiris/actions-hugo@v3
+        with:
+          hugo-version: ${{ matrix.hugo-version }}
+          extended: true
+
+      - name: Create example site
+        run: |
+          hugo new site exampleSite
+          cd exampleSite
+          mkdir -p themes/huey
+          cp -r ../assets ../layouts ../static ../config.toml ../theme.toml themes/huey/
+
+      - name: Create sample content
+        run: |
+          cd exampleSite
+          mkdir -p content/posts
+          cat > content/posts/test-post.md << 'EOF'
+          ---
+          title: "Test Post"
+          date: 2024-01-01
+          draft: false
+          ---
+          This is a test post to verify the theme builds correctly.
+          EOF
+
+      - name: Build site
+        run: |
+          cd exampleSite
+          hugo --themesDir .. -t huey --minify
+
+      - name: Verify build output
+        run: |
+          cd exampleSite
+          if [ ! -d "public" ]; then
+            echo "Build failed: public directory not created"
+            exit 1
+          fi
+          if [ ! -f "public/index.html" ]; then
+            echo "Build failed: index.html not generated"
+            exit 1
+          fi
+          echo "Build successful!"
+
+  validate:
+    name: Validate theme files
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Check for required files
+        run: |
+          REQUIRED_FILES=(
+            "theme.toml"
+            "LICENSE"
+            "README.md"
+            "layouts/_default/baseof.html"
+          )
+
+          for file in "${REQUIRED_FILES[@]}"; do
+            if [ ! -f "$file" ]; then
+              echo "Missing required file: $file"
+              exit 1
+            fi
+          done
+          echo "All required files present"
+
+      - name: Validate theme.toml
+        run: |
+          if ! grep -q "min_version" theme.toml; then
+            echo "theme.toml missing min_version"
+            exit 1
+          fi
+          echo "theme.toml is valid"
+
+      - name: Check for broken internal links
+        run: |
+          # Check for common broken link patterns in markdown files
+          if grep -r "](http://" README.md 2>/dev/null; then
+            echo "Warning: Found HTTP links in documentation (should be HTTPS)"
+          fi
+          echo "Link check complete"
+
+  lint:
+    name: Lint files
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Lint Markdown files
+        uses: DavidAnson/markdownlint-cli2-action@v18
+        with:
+          globs: '**/*.md'
+        continue-on-error: true

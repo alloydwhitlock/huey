@@ -1,0 +1,127 @@
+name: Security Scan
+
+on:
+  schedule:
+    - cron: '0 0 * * 1'  # Weekly on Mondays at midnight UTC
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  security-events: write
+
+jobs:
+  trivy:
+    name: Trivy vulnerability scan
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Run Trivy vulnerability scanner
+        uses: aquasecurity/trivy-action@master
+        with:
+          scan-type: 'fs'
+          scan-ref: '.'
+          format: 'sarif'
+          output: 'trivy-results.sarif'
+          severity: 'CRITICAL,HIGH,MEDIUM'
+
+      - name: Upload Trivy results to GitHub Security
+        uses: github/codeql-action/upload-sarif@v3
+        if: always()
+        with:
+          sarif_file: 'trivy-results.sarif'
+
+      - name: Run Trivy vulnerability scanner (table format)
+        uses: aquasecurity/trivy-action@master
+        with:
+          scan-type: 'fs'
+          scan-ref: '.'
+          format: 'table'
+          severity: 'CRITICAL,HIGH,MEDIUM'
+
+  codeql:
+    name: CodeQL analysis
+    runs-on: ubuntu-latest
+    permissions:
+      security-events: write
+      actions: read
+      contents: read
+
+    strategy:
+      fail-fast: false
+      matrix:
+        language: [ 'javascript' ]
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Initialize CodeQL
+        uses: github/codeql-action/init@v3
+        with:
+          languages: ${{ matrix.language }}
+          queries: security-extended
+
+      - name: Autobuild
+        uses: github/codeql-action/autobuild@v3
+
+      - name: Perform CodeQL Analysis
+        uses: github/codeql-action/analyze@v3
+        with:
+          category: "/language:${{matrix.language}}"
+
+  dependency-review:
+    name: Dependency review
+    runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request'
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Dependency Review
+        uses: actions/dependency-review-action@v4
+        with:
+          fail-on-severity: moderate
+
+  security-headers:
+    name: Validate security documentation
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Check for security documentation
+        run: |
+          echo "Checking for security-related documentation..."
+
+          # Check for SECURITY.md
+          if [ ! -f "SECURITY.md" ]; then
+            echo "::warning::SECURITY.md not found"
+          else
+            echo "✓ SECURITY.md found"
+          fi
+
+          # Check for security headers documentation
+          if grep -q "Content-Security-Policy\|security headers" README.md netlify.toml 2>/dev/null; then
+            echo "✓ Security headers documentation found"
+          else
+            echo "::warning::No security headers documentation found in README.md or netlify.toml"
+          fi
+
+          # Check for HTTPS links
+          if grep -r "http://" layouts/ 2>/dev/null | grep -v "http://www.w3.org" | grep -v "http://schemas"; then
+            echo "::error::Found HTTP links in layouts (should be HTTPS)"
+            exit 1
+          else
+            echo "✓ No insecure HTTP links found in layouts"
+          fi
+
+          echo "Security documentation check complete"

@@ -1,0 +1,85 @@
+# Netlify configuration for Huey Hugo theme
+# This file provides recommended security headers and build settings
+# Copy this file to your Hugo site root and customize as needed
+
+[build]
+  publish = "public"
+  command = "hugo --gc --minify"
+
+[build.environment]
+  HUGO_VERSION = "0.154.2"
+  HUGO_ENV = "production"
+  HUGO_ENABLEGITINFO = "true"
+
+[context.production.environment]
+  HUGO_ENV = "production"
+
+[context.deploy-preview]
+  command = "hugo --gc --minify --buildFuture -b $DEPLOY_PRIME_URL"
+
+[context.branch-deploy]
+  command = "hugo --gc --minify -b $DEPLOY_PRIME_URL"
+
+# Security Headers
+[[headers]]
+  for = "/*"
+  [headers.values]
+    # Content Security Policy
+    # Adjust this based on your specific needs and external resources
+    Content-Security-Policy = """
+      default-src 'self'; \
+      script-src 'self' https://kit.fontawesome.com 'unsafe-inline'; \
+      style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; \
+      img-src 'self' data: https:; \
+      font-src 'self' https://kit.fontawesome.com https://fonts.gstatic.com; \
+      connect-src 'self'; \
+      frame-ancestors 'none'; \
+      base-uri 'self'; \
+      form-action 'self'
+    """
+
+    # Prevent clickjacking attacks
+    X-Frame-Options = "DENY"
+
+    # Prevent MIME type sniffing
+    X-Content-Type-Options = "nosniff"
+
+    # Enable XSS protection (legacy browsers)
+    X-XSS-Protection = "1; mode=block"
+
+    # Control referrer information
+    Referrer-Policy = "strict-origin-when-cross-origin"
+
+    # Control browser features and APIs
+    Permissions-Policy = "geolocation=(), microphone=(), camera=()"
+
+    # Force HTTPS (enable after confirming HTTPS works)
+    # Strict-Transport-Security = "max-age=31536000; includeSubDomains; preload"
+
+# Cache static assets
+[[headers]]
+  for = "/css/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/js/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/fonts/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/images/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# Redirect HTTP to HTTPS (optional, uncomment if needed)
+# [[redirects]]
+#   from = "http://*"
+#   to = "https://:splat"
+#   status = 301
+#   force = true

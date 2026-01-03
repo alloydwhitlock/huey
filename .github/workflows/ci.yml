@@ -30,7 +30,7 @@ jobs:
           hugo new site exampleSite
           cd exampleSite
           mkdir -p themes/huey
-          cp -r ../assets ../layouts ../static ../config.toml ../theme.toml themes/huey/
+          cp -r ../assets ../layouts ../static ../archetypes ../theme.toml themes/huey/
 
       - name: Create sample content
         run: |
@@ -48,7 +48,8 @@ jobs:
       - name: Build site
         run: |
           cd exampleSite
-          hugo --themesDir .. -t huey --minify
+          echo 'theme = "huey"' >> hugo.toml
+          hugo --minify
 
       - name: Verify build output
         run: |

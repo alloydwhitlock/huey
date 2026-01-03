@@ -47,7 +47,7 @@ If you use Huey cloned directly, you will need to run `git pull` within `themes/
 
 Git Submodule allows you to have one git repository located within another. This lets you separate what your working site directory will be from the Huey theme, as an example. It's a great choice when you have an external component you don't fully control, since it locks the repository reference to the specific commit you used.
 
-```git submodule add https://github.com/alloydwhitlock/huey/ themes/huey --depth=1```
+```git submodule add https://github.com/alloydwhitlock/huey/ themes/huey```
 
 If you use Huey as a submodule, you will need to run `git submodule update --remote --merge` when updating the most more recent version.
 
